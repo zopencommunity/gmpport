@@ -1,0 +1,23 @@
+export ZOPEN_STABLE_URL="https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz"
+export ZOPEN_STABLE_DEPS="make"
+export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_CATEGORIES="core"
+export ZOPEN_EXTRA_CONFIGURE_OPTS='--disable-assembly'
+export ZOPEN_COMP=CLANG
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:1"
+  echo "expectedTotalTests:1"
+}
+
+zopen_get_version()
+{
+  echo "1.0.0"
+}
