@@ -48,5 +48,28 @@ zopen_check_results()
 
 zopen_get_version()
 {
-  echo "1.0.0"
+  # Create C program
+  for tmp in "${TMPDIR}" "${TMP}" /tmp; do
+    if [ ! -z ${tmp} ] && [ -d ${tmp} ]; then
+      break
+    fi
+  done
+
+  gmptmp="${tmp}/gmp$$"
+  gmpc="${gmptmp}/gmpver.c"
+  gmpver="${gmptmp}/gmpver"
+  mkdir -p "${gmptmp}" || return 8
+  cat >"${gmpc}" <<ZZ || return 8
+#include "gmp.h"
+#include <stdio.h>
+
+int main() {
+  printf("%s\n", gmp_version);
+  return 0;
+}
+ZZ
+  clang -L./.libs/ -I./ -fzos-le-char-mode=ascii -o"$gmpver" "$gmpc" -lgmp || return 8
+  "$gmpver"
+
+  rm -rf "${gmptmp}"
 }
