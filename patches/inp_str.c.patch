@@ -1,0 +1,14 @@
+diff --git a/mpz/inp_str.c b/mpz/inp_str.c
+index 0756055..ca03bd4 100644
+--- a/mpz/inp_str.c
++++ b/mpz/inp_str.c
+@@ -41,6 +41,9 @@ see https://www.gnu.org/licenses/.  */
+ 
+ #define digit_value_tab __gmp_digit_value_tab
+ 
++size_t
++mpz_inp_str_nowhite (mpz_ptr x, FILE *stream, int base, int c, size_t nread);
++
+ size_t
+ mpz_inp_str (mpz_ptr x, FILE *stream, int base)
+ {

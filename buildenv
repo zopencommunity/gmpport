@@ -5,17 +5,45 @@ export ZOPEN_CATEGORIES="core"
 export ZOPEN_EXTRA_CONFIGURE_OPTS='--disable-assembly'
 export ZOPEN_COMP=CLANG
 
+#
+# Several tests of the form:
+#
+#============================================================================
+#Testsuite summary for GNU MP 6.3.0
+#============================================================================
+# TOTAL: x
+# PASS:  y
+# SKIP:  z
+# XFAIL: a
+# FAIL:  b
+# XPASS: c
+# ERROR: d
+
+sum()
+{
+  tot=0
+  for num in $*; do
+    tot=$((tot+num))
+  done
+  echo $tot
+}
 
 zopen_check_results()
 {
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
+  summary="$1/$2_summary.log"
 
-  echo "actualFailures:0"
-  echo "totalTests:1"
-  echo "expectedFailures:1"
-  echo "expectedTotalTests:1"
+  failures=$(grep -E '^# FAIL: ' "${chk}" | awk '{print $3;}')
+  passes=$(grep -E '^# PASS: ' "${chk}" | awk '{print $3;}')
+  totals=$(grep -E '^# TOTAL: ' "${chk}" | awk '{print $3;}')
+
+  echo "Pass: $(sum ${passes}) Fail: $(sum ${failures}) Total: $(sum ${totals})" >"${summary}"
+  echo "actualFailures:$(sum ${failures})"
+  echo "totalTests:$(sum ${totals})"
+  echo "expectedFailures:0"
+  echo "expectedTotalTests:178"
 }
 
 zopen_get_version()
