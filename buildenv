@@ -5,6 +5,7 @@ export ZOPEN_CATEGORIES="core"
 export ZOPEN_EXTRA_CONFIGURE_OPTS='--disable-assembly'
 export ZOPEN_COMP=CLANG
 
+
 zopen_check_results()
 {
   dir="$1"
