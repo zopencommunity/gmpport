@@ -1,0 +1,15 @@
+diff --git a/configure b/configure
+index 7910aa0..b4159aa 100755
+--- a/configure
++++ b/configure
+@@ -13028,6 +13028,10 @@ lt_cv_deplibs_check_method='unknown'
+ # whether 'pass_all' will *always* work, you probably want this one.
+ 
+ case $host_os in
++openedition)
++  lt_cv_deplibs_check_method=pass_all
++  ;;
++
+ aix[4-9]*)
+   lt_cv_deplibs_check_method=pass_all
+   ;;

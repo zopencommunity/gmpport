@@ -4,3 +4,4 @@ log.STABLE/
 build/
 install/
 gmp-6.3.0/
+nohup.out
