@@ -1,4 +1,7 @@
-export ZOPEN_STABLE_URL="https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz"
+# bump: gmp-version /GMP_VERSION="(.*)"/ https://gmplib.org/|re:/gmp-([\d.]+).tar.xz/|semver:*
+GMP_VERSION="6.3.0"
+
+export ZOPEN_STABLE_URL="https://gmplib.org/download/gmp/gmp-${GMP_VERSION}.tar.xz"
 export ZOPEN_STABLE_DEPS="make"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="core"
